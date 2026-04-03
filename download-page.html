@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Figma转React工具 - 立即下载</title>
+    <meta name="description" content="专业的AI驱动的Figma到React组件转换工具，立即下载体验">
+    <link rel="stylesheet" href="styles/download-page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-box">AI</div>
+                <div class="logo-text">
+                    <h1 id="brandName">AI-Figma转React</h1>
+                    <span id="brandTagline">官方正版开发工具</span>
+                </div>
+            </div>
+            <div class="room-number">
+                <span class="room-icon">🏠</span>
+                <span class="room-label">房间号:</span>
+                <span class="room-value" id="roomNumber">811855</span>
+            </div>
+            <a href="stats-panel.html" class="stats-link">📊 查看数据</a>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- 左侧介绍区域 -->
+            <div class="intro-section">
+                <h2 class="main-title">
+                    <span class="title-highlight">畅享AI智能</span>开发体验
+                </h2>
+                <p class="intro-text">
+                    专为开发者设计的AI驱动Figma转React工具，提供流畅稳定的代码生成体验。支持一键转换，立即加入房间 <span class="highlight-number">811855</span> 开始高效开发。
+                </p>
+                
+                <!-- 统计数据 -->
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="100000">0</div>
+                        <div class="stat-label">用户下载</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="99">0</div>
+                        <div class="stat-suffix">%</div>
+                        <div class="stat-label">好评率</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-suffix">×7</div>
+                        <div class="stat-label">小时客服</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧下载区域 -->
+            <div class="download-section">
+                <div class="download-card">
+                    <h3 class="download-title">立即下载</h3>
+                    
+                    <!-- 平台选择 -->
+                    <div class="platform-selector">
+                        <button class="platform-btn active" data-platform="windows">
+                            <span class="platform-icon">🪟</span>
+                            <span>Windows</span>
+                        </button>
+                        <button class="platform-btn" data-platform="mac">
+                            <span class="platform-icon">🍎</span>
+                            <span>macOS</span>
+                        </button>
+                        <button class="platform-btn" data-platform="linux">
+                            <span class="platform-icon">🐧</span>
+                            <span>Linux</span>
+                        </button>
+                    </div>
+
+                    <!-- 主下载按钮 -->
+                    <a href="#download" class="main-download-btn" id="mainDownloadBtn">
+                        <span class="download-icon">⬇</span>
+                        <span class="download-text">免费下载AI工具</span>
+                    </a>
+
+                    <!-- 分割线 -->
+                    <div class="divider">
+                        <span>或</span>
+                    </div>
+
+                    <!-- 扫码下载 -->
+                    <div class="qr-section">
+                        <p class="qr-title">手机扫码下载</p>
+                        <div class="qr-code" id="qrCode">
+                            <div class="qr-placeholder">
+                                <div class="qr-pattern">
+                                    <div class="qr-square"></div>
+                                    <div class="qr-square"></div>
+                                    <div class="qr-square"></div>
+                                    <div class="qr-square"></div>
+                                </div>
+                                <p class="qr-loading">二维码加载中...</p>
+                            </div>
+                        </div>
+                        <p class="qr-hint">使用手机扫描二维码快速下载</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 功能特性区域 -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">为什么选择我们</h2>
+            <div class="features-grid">
+                <div class="feature-card" onclick="showFeatureDetail('ai')">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI智能转换</h3>
+                    <p>基于先进的AI技术，自动识别设计元素并生成高质量代码</p>
+                    <span class="feature-link">了解更多 →</span>
+                </div>
+                <div class="feature-card" onclick="showFeatureDetail('speed')">
+                    <div class="feature-icon">⚡</div>
+                    <h3>极速生成</h3>
+                    <p>秒级转换速度，大幅提升开发效率，节省宝贵时间</p>
+                    <span class="feature-link">了解更多 →</span>
+                </div>
+                <div class="feature-card" onclick="showFeatureDetail('quality')">
+                    <div class="feature-icon">✨</div>
+                    <h3>代码质量</h3>
+                    <p>生成的代码符合最佳实践，易于维护和扩展</p>
+                    <span class="feature-link">了解更多 →</span>
+                </div>
+                <div class="feature-card" onclick="showFeatureDetail('support')">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>全面支持</h3>
+                    <p>支持React、Vue、Angular等多种主流框架</p>
+                    <span class="feature-link">了解更多 →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户评价区域 -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">用户好评</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"这个工具真的太棒了！以前需要几个小时的工作，现在几分钟就能完成。"</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">张工程师</span>
+                        <span class="author-title">前端开发</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"代码质量很高，生成的组件结构清晰，完全符合我们的开发规范。"</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">李设计师</span>
+                        <span class="author-title">UI设计师</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"团队协作效率提升明显，设计师和开发者之间的沟通成本大大降低。"</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">王经理</span>
+                        <span class="author-title">产品经理</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA区域 -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>准备好提升开发效率了吗？</h2>
+            <p>立即下载，加入超过10万开发者的行列</p>
+            <a href="#download" class="cta-button" onclick="scrollToDownload()">
+                立即免费下载
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#about">关于我们</a>
+                    <a href="#privacy">隐私政策</a>
+                    <a href="#terms">使用条款</a>
+                    <a href="#contact">联系我们</a>
+                </div>
+                <p>&copy; 2026 AI-Figma转React工具. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 功能详情弹窗 -->
+    <div class="modal" id="featureModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+                <!-- 动态内容 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 下载提示弹窗 -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content download-modal-content">
+            <span class="modal-close" onclick="closeDownloadModal()">&times;</span>
+            <div class="download-progress">
+                <div class="progress-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="progress-bar" cx="50" cy="50" r="45" id="progressCircle"></circle>
+                    </svg>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+                <h3 id="downloadStatus">正在准备下载...</h3>
+                <p id="downloadMessage">请稍候，正在为您准备安装包</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加样式 -->
+    <style>
+        .stats-link {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        .stats-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    
+    <!-- 引入配置文件 -->
+    <script src="config/content-config.js"></script>
+    <!-- 引入统计分析 -->
+    <script src="js/analytics.js"></script>
+    <!-- 引入主脚本 -->
+    <script src="js/download-page.js"></script>
+</body>
+</html>
