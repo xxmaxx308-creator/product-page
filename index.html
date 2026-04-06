@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Figma转React工具 - 立即下载</title>
+    <title>AI-Figma转React工具 - 极光渐变版</title>
     <meta name="description" content="专业的AI驱动的Figma到React组件转换工具，立即下载体验">
-    <link rel="stylesheet" href="styles/download-page.css">
+    <link rel="stylesheet" href="styles/aurora.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <!-- SVG渐变定义 -->
+    <svg style="position:absolute;width:0;height:0">
+        <defs>
+            <linearGradient id="auroraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4facfe"/>
+                <stop offset="50%" style="stop-color:#a855f7"/>
+                <stop offset="100%" style="stop-color:#f472b6"/>
+            </linearGradient>
+        </defs>
+    </svg>
 </head>
 <body>
-    <!-- 视频背景 -->
-    <div class="video-bg-wrapper">
-        <video class="video-bg" autoplay muted loop playsinline>
-            <source src="bg.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
+    <!-- 极光背景 -->
+    <div class="aurora-bg"></div>
 
     <!-- 顶部导航栏 -->
     <header class="header">
@@ -33,7 +39,7 @@
                 <span class="room-label">房间号:</span>
                 <span class="room-value" id="roomNumber">811855</span>
             </div>
-            <a href="stats-panel.html" class="stats-link">📊 查看数据</a>
+            <a class='stats-link' href='/stats-panel'>📊 查看数据</a>
         </div>
     </header>
 
@@ -48,7 +54,7 @@
                 <p class="intro-text">
                     专为开发者设计的AI驱动Figma转React工具，提供流畅稳定的代码生成体验。支持一键转换，立即加入房间 <span class="highlight-number">811855</span> 开始高效开发。
                 </p>
-                
+
                 <!-- 统计数据 -->
                 <div class="stats-section">
                     <div class="stat-item">
@@ -72,7 +78,7 @@
             <div class="download-section">
                 <div class="download-card">
                     <h3 class="download-title">立即下载</h3>
-                    
+
                     <!-- 平台选择 -->
                     <div class="platform-selector">
                         <button class="platform-btn active" data-platform="windows">
@@ -241,47 +247,78 @@
         </div>
     </div>
 
-    <!-- 添加样式 -->
-    <style>
-        /* 视频背景 */
-        .video-bg-wrapper {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .video-bg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .video-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.45);
+    <script>
+        // 简单的数字动画效果
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(num => {
+                const target = parseInt(num.getAttribute('data-target'));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    num.textContent = Math.floor(current).toLocaleString();
+                }, 30);
+            });
         }
 
-        .stats-link {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.3s ease;
+        // 页面加载完成后执行动画
+        window.addEventListener('load', () => {
+            setTimeout(animateNumbers, 500);
+        });
+
+        // 滚动到下载区域
+        function scrollToDownload() {
+            document.querySelector('.download-card').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
         }
-        .stats-link:hover {
-            background: rgba(255, 255, 255, 0.3);
+
+        // 功能详情弹窗
+        function showFeatureDetail(feature) {
+            const modal = document.getElementById('featureModal');
+            const modalBody = document.getElementById('modalBody');
+
+            const features = {
+                ai: '<h2 style="background:linear-gradient(135deg,#4facfe,#a855f7,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">🤖 AI智能转换</h2><p>采用最先进的AI模型，自动识别Figma中的设计元素，包括组件、样式、布局等，并智能生成对应的React代码。支持最新的React特性，生成的代码简洁、高效、可维护。</p>',
+                speed: '<h2 style="background:linear-gradient(135deg,#4facfe,#a855f7,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">⚡ 极速生成</h2><p>我们的优化算法确保转换速度达到毫秒级。一个完整的页面组件可以在几秒内生成完成，大大提升开发效率。</p>',
+                quality: '<h2 style="background:linear-gradient(135deg,#4facfe,#a855f7,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">✨ 代码质量</h2><p>生成的代码遵循React最佳实践，包括Hooks、组件分离、样式模块化等。代码结构清晰，易于阅读和维护。</p>',
+                support: '<h2 style="background:linear-gradient(135deg,#4facfe,#a855f7,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">🛠️ 全面支持</h2><p>支持React、Vue、Angular等多种主流框架。可以根据项目需求自定义输出格式和代码风格。</p>'
+            };
+
+            modalBody.innerHTML = features[feature] || '<p>功能详情准备中...</p>';
+            modal.classList.add('active');
         }
-    </style>
-    
-    <!-- 引入配置文件 -->
-    <script src="config/content-config.js"></script>
-    <!-- 引入统计分析 -->
-    <script src="js/analytics.js"></script>
-    <!-- 引入主脚本 -->
-    <script src="js/download-page.js"></script>
+
+        function closeModal() {
+            document.getElementById('featureModal').classList.remove('active');
+        }
+
+        function closeDownloadModal() {
+            document.getElementById('downloadModal').classList.remove('active');
+        }
+
+        // 点击弹窗背景关闭
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // 平台选择
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
