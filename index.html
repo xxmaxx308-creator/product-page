@@ -262,6 +262,33 @@
             margin-bottom: 16px;
             letter-spacing: 1px;
         }
+
+        /* 房间号数字流动效果 */
+        .room-value {
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf, #00d4ff);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flowNumber 2s linear infinite;
+            font-weight: 700;
+        }
+
+        @keyframes flowNumber {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* 高亮数字流动效果 */
+        .highlight-number {
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf, #00d4ff);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flowNumber 2s linear infinite;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
