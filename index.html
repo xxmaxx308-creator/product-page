@@ -19,6 +19,228 @@
             </linearGradient>
         </defs>
     </svg>
+
+    <style>
+        /* ========== 新增下载按钮样式 ========== */
+        .download-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .download-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 200, 255, 0.2);
+        }
+
+        .download-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .download-btn svg {
+            width: 36px;
+            height: 36px;
+            fill: #ffffff;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .download-btn span {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* 弹窗遮罩层 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 弹窗内容 */
+        .modal-content {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px 35px;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: #ffffff;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-btn-confirm {
+            background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 100%);
+            color: #ffffff;
+        }
+
+        .modal-btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* 二维码区域美化 */
+        .qr-container {
+            display: inline-block;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            padding: 2px;
+            background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 50%, #00d4ff 100%);
+            background-size: 200% 200%;
+            animation: gradientRotate 3s linear infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .qr-code-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .qr-title-new {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 <body>
     <!-- 极光背景 -->
@@ -79,48 +301,48 @@
                 <div class="download-card">
                     <h3 class="download-title">立即下载</h3>
 
-                    <!-- 平台选择 -->
-                    <div class="platform-selector">
-                        <button class="platform-btn active" data-platform="windows">
-                            <span class="platform-icon">🪟</span>
-                            <span>Windows</span>
-                        </button>
-                        <button class="platform-btn" data-platform="mac">
-                            <span class="platform-icon">🍎</span>
-                            <span>macOS</span>
-                        </button>
-                        <button class="platform-btn" data-platform="linux">
-                            <span class="platform-icon">🐧</span>
-                            <span>Linux</span>
-                        </button>
-                    </div>
+                    <!-- 新的下载按钮 - Android/iOS/Web -->
+                    <div class="download-buttons">
+                        <!-- Android -->
+                        <div class="download-btn" onclick="showConfirmModal('android')">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0225 3.503a11.7067 11.7067 0 00-5.1347-1.179c-1.8501 0-3.5839.4307-5.0937 1.1538L4.874 5.447a.416.416 0 00-.5676-.1521.4156.4156 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589.3432 18.6617h23.3136c0-4.0028-2.3457-7.475-5.8055-9.3403"/>
+                            </svg>
+                            <span>Android</span>
+                        </div>
 
-                    <!-- 主下载按钮 -->
-                    <a href="#download" class="main-download-btn" id="mainDownloadBtn">
-                        <span class="download-icon">⬇</span>
-                        <span class="download-text">免费下载AI工具</span>
-                    </a>
+                        <!-- iOS -->
+                        <div class="download-btn" onclick="showConfirmModal('ios')">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
+                            </svg>
+                            <span>iOS</span>
+                        </div>
+
+                        <!-- Web -->
+                        <div class="download-btn" onclick="showConfirmModal('web')">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22.8a10.8 10.8 0 1 1 0-21.6 10.8 10.8 0 0 1 0 21.6zm0-3.6a7.2 7.2 0 1 0 0-14.4 7.2 7.2 0 0 0 0 14.4z"/>
+                                <circle cx="12" cy="12" r="2.4"/>
+                            </svg>
+                            <span>Web</span>
+                        </div>
+                    </div>
 
                     <!-- 分割线 -->
-                    <div class="divider">
-                        <span>或</span>
+                    <div class="divider" style="display: flex; align-items: center; margin: 20px 0; color: rgba(255, 255, 255, 0.5); font-size: 14px;">
+                        <span style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);"></span>
+                        <span style="padding: 0 15px;">或</span>
+                        <span style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);"></span>
                     </div>
 
-                    <!-- 扫码下载 -->
+                    <!-- 扫码下载 - 美化版 -->
                     <div class="qr-section">
-                        <p class="qr-title">手机扫码下载</p>
-                        <div class="qr-code" id="qrCode">
-                            <div class="qr-placeholder">
-                                <div class="qr-pattern">
-                                    <div class="qr-square"></div>
-                                    <div class="qr-square"></div>
-                                    <div class="qr-square"></div>
-                                    <div class="qr-square"></div>
-                                </div>
-                                <p class="qr-loading">二维码加载中...</p>
-                            </div>
+                        <p class="qr-title-new">手机扫码下载</p>
+                        <div class="qr-container">
+                            <img src="https://raw.githubusercontent.com/xxmaxx308-creator/product-page/main/3.jpg" alt="下载二维码" class="qr-code-img">
                         </div>
-                        <p class="qr-hint">使用手机扫描二维码快速下载</p>
+                        <p style="margin-top: 14px; font-size: 12px; color: rgba(255, 255, 255, 0.5); letter-spacing: 1px;">使用手机扫描二维码快速下载</p>
                     </div>
                 </div>
             </div>
@@ -198,7 +420,7 @@
         <div class="container">
             <h2>准备好提升开发效率了吗？</h2>
             <p>立即下载，加入超过10万开发者的行列</p>
-            <a href="#download" class="cta-button" onclick="scrollToDownload()">
+            <a href="#" class="cta-button" onclick="scrollToDownload(); return false;">
                 立即免费下载
             </a>
         </div>
@@ -247,8 +469,80 @@
         </div>
     </div>
 
+    <!-- 确认弹窗 -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon"></div>
+            <h3 class="modal-title" id="modalTitle">确认操作</h3>
+            <p class="modal-message" id="modalMessage">您确定要继续吗？</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal2()">取消</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmDownload()">确认</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // 简单的数字动画效果
+        // ========== 新的下载确认弹窗功能 ==========
+        const downloadLinks = {
+            android: {
+                url: 'https://apd.glvroc.com/download/mj_v1.9.6.apk',
+                name: 'Android',
+                icon: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0225 3.503a11.7067 11.7067 0 00-5.1347-1.179c-1.8501 0-3.5839.4307-5.0937 1.1538L4.874 5.447a.416.416 0 00-.5676-.1521.4156.4156 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589.3432 18.6617h23.3136c0-4.0028-2.3457-7.475-5.8055-9.3403"/></svg>`,
+                message: '是否下载 Android 版本？'
+            },
+            ios: {
+                url: 'itms-services://?action=download-manifest&url=https://apo.glvroc.com/download/ipa/mj_1.9.6_1e.plist',
+                name: 'iOS',
+                icon: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>`,
+                message: '是否下载 iOS 版本？'
+            },
+            web: {
+                url: 'https://www.mjweb204.xyz/',
+                name: 'Web',
+                icon: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22.8a10.8 10.8 0 1 1 0-21.6 10.8 10.8 0 0 1 0 21.6zm0-3.6a7.2 7.2 0 1 0 0-14.4 7.2 7.2 0 0 0 0 14.4z"/><circle cx="12" cy="12" r="2.4"/></svg>`,
+                message: '是否跳转Web登陆页面？'
+            }
+        };
+
+        let currentPlatform = null;
+
+        function showConfirmModal(platform) {
+            currentPlatform = platform;
+            const config = downloadLinks[platform];
+            document.getElementById('modalIcon').innerHTML = config.icon;
+            document.getElementById('modalTitle').textContent = config.name;
+            document.getElementById('modalMessage').textContent = config.message;
+            document.getElementById('confirmModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal2() {
+            document.getElementById('confirmModal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentPlatform = null;
+        }
+
+        function confirmDownload() {
+            if (currentPlatform && downloadLinks[currentPlatform]) {
+                window.location.href = downloadLinks[currentPlatform].url;
+            }
+            closeModal2();
+        }
+
+        document.getElementById('confirmModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal2();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal2();
+            }
+        });
+
+        // ========== 原有功能 ==========
         function animateNumbers() {
             const statNumbers = document.querySelectorAll('.stat-number');
             statNumbers.forEach(num => {
@@ -266,12 +560,10 @@
             });
         }
 
-        // 页面加载完成后执行动画
         window.addEventListener('load', () => {
             setTimeout(animateNumbers, 500);
         });
 
-        // 滚动到下载区域
         function scrollToDownload() {
             document.querySelector('.download-card').scrollIntoView({
                 behavior: 'smooth',
@@ -279,7 +571,6 @@
             });
         }
 
-        // 功能详情弹窗
         function showFeatureDetail(feature) {
             const modal = document.getElementById('featureModal');
             const modalBody = document.getElementById('modalBody');
@@ -303,7 +594,6 @@
             document.getElementById('downloadModal').classList.remove('active');
         }
 
-        // 点击弹窗背景关闭
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -312,7 +602,6 @@
             });
         });
 
-        // 平台选择
         document.querySelectorAll('.platform-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
