@@ -38,18 +38,40 @@
             width: 100px;
             height: 100px;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 50%, #00d4ff 100%);
+            background-size: 200% 200%;
+            animation: gradientRotate 3s linear infinite;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .download-btn:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(100, 200, 255, 0.2);
         }
